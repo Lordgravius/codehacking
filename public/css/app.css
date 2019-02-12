@@ -1,4 +1,14 @@
 #admin-page {
-  padding-top: 2px; }
+  padding-top: 0.1rem; }
+
+.admin-userlist-title {
+  font-size: 3rem;
+  text-align: center; }
+
+.user-list-item {
+  text-align: center; }
+
+.btn.plusten {
+  padding: 5px 30px 5px 30px; }
 
 /*# sourceMappingURL=app.css.map */
