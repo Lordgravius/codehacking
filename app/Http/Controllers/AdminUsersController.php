@@ -23,9 +23,18 @@ class AdminUsersController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        return view('admin.users.store');
+    public function store(Request $request) {
+        
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->pwd."salted");
+        $user->role_id = (int) $request->role;
+        $user->save();
+        
+        $users = User::all();
+      
+        return view('admin.users.index', compact('users'));
     }
 
 
