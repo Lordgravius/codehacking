@@ -5,7 +5,7 @@
   
   @include('includes.form_error')
 
-  <form class="form-horizontal" method="post" action="{{ action('AdminUsersController@store') }}">
+  <form class="form-horizontal" method="post" action="{{ action('AdminUsersController@store') }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
       <label class="control-label" for="name">Name:</label>
@@ -22,6 +22,7 @@
     <div class="form-group">
       <label for="sel1">User role (select one):</label>
       <select class="form-control" id="sel1" name="role_id">
+        <option selected>Choose one</option>
         @foreach($roles as $role)
           <option value="{{ $role->id }}">{{ $role->name }}</option>
         @endforeach
@@ -39,8 +40,8 @@
         <span class="input-group-text" id="inputGroupFileAddon01">Upload file:</span>
       </div>
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-        <!--<label class="custom-file-label" for="inputGroupFile01">Choose file</label>-->
+        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo_id">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
       </div>
       <br>
     </div>

@@ -9,14 +9,14 @@ class AddPhotoColumnUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('photo');
+            $table->string('photo_id');
         });
     }
     
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('photo');
+            $table->dropColumn('photo_id');
         });
     }
 }

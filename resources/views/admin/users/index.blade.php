@@ -1,6 +1,4 @@
-b @extends('layouts.admin')
-
-
+@extends('layouts.admin')
 
 @section('content')
   <h1 class="admin-userlist-title">Users</h1>
