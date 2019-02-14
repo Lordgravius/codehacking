@@ -2,7 +2,7 @@
 
 @section('content')
   <h1 class="admin-userlist-title">Users</h1>
-  <div class="row">
+  {{--<div class="row">
       <div class="col-lg-1 user-list-item"><strong>ID</strong></div>
       <div class="col-lg-2 user-list-item"><strong>Name</strong></div>
       <div class="col-lg-2 user-list-item"><strong>Role</strong></div>
@@ -22,11 +22,12 @@
       @endforeach
     @endif
   </div>
-  <br><br><br>
+  <br><br><br>--}}
   <table class="table table-hover">
     <thead>
     <tr>
       <th class="user-list-item">ID</th>
+      <th class="user-list-item">Photo</th>
       <th class="user-list-item">Name</th>
       <th class="user-list-item">Role</th>
       <th class="user-list-item">Email</th>
@@ -40,7 +41,15 @@
       @foreach($users as $user)
         <tr>
           <td class="user-list-item">{{ $user->id }}</td>
-          <td class="user-list-item">{{ $user->name }}</td>
+          <td class="user-list-item">
+            @if($user->photo)  
+              <img src="{{ $user->photo->file }}" width="50" height="50">
+            @else
+              <img src="/images/no-photo.png" alt="No photo" width="50" height="50" class="img-responsive img-rounded">
+
+            @endif
+          </td>
+          <td class="user-list-item"><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
           <td class="user-list-item">{{ $user->role['name'] }}</td>
           <td class="user-list-item">{{ $user->email }}</td>
           <td class="user-list-item">{{ $user->is_active ? 'Active' : 'Inactive' }}</td>

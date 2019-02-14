@@ -41,7 +41,7 @@
       </div>
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="photo_id">
-        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        {{--<label class="custom-file-label" for="inputGroupFile01">Choose file</label>--}}
       </div>
       <br>
     </div>

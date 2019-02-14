@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersCreateRequest;
+use App\Http\Requests\UsersEditRequest;
 use App\Model\User;
 use App\Model\Photo;
 
@@ -52,11 +53,39 @@ class AdminUsersController extends Controller {
   }
 
   public function edit($id) {
-    return view('admin.users.edit');
+    $user = User::findOrFail($id);
+    $roles = DB::table('roles')->select('id', 'name')->get();
+    return view('admin.users.edit', compact('user', 'roles'));
   }
 
-  public function update(Request $request, $id) {
-    return view('admin.users.update');
+  public function update(UsersEditRequest $request, $id) {
+
+    $input = $request->all();
+    
+/*    if(bcrypt($request->oldpassword."salted") != $user = User::find($id)->password)
+      return redirect()->back()->withErrors(['token' => 'The Old password not passed!']);*/
+    
+
+    
+    if($request->newpassword != $request->newpasswordagain)
+      return redirect()->back()->withErrors(['token' => 'The New password confirmation not passed!']);
+
+    // File törlés és update még nins kész.
+    
+    if($file = $request->file('photo_id')) {
+      $name = time() . $file->getClientOriginalName();
+      $file->move('images', $name);
+      $photo = Photo::create(['file' => $name]);
+      $input['photo_id'] = $photo->id;
+    }
+    // Véglegesíteni a felhasználó mentését.
+    // Csak jelszó cserénél várja el, hogy a passwordök meg legyenek adva.
+    $request->password = bcrypt($request->newpassword."salted");
+    User::find($id)->save($request->all());
+    
+    
+    dd($request->all(), $id);
+    return view('admin.users.index');
   }
 
   public function destroy($id) {

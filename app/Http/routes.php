@@ -24,3 +24,6 @@ Route::get('/admin', function() {
 });
 
 Route::resource('admin/users', 'AdminUsersController');
+// Ez valamiért nem akart működni a resource routeon belül.
+// Update helyett a show methodra irányított át.
+Route::post('admin/users/{id}/update', 'AdminUsersController@update');
